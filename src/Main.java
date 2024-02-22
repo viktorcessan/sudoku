@@ -1,4 +1,9 @@
 import java.util.Scanner;
+import java.util.Random;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 public class Main {
     public static void welcomeMessage () {
         System.out.println("Hello and welcome to Viktors Sudoku");
@@ -9,7 +14,7 @@ public class Main {
     }
     public static void printArray(String[][]sudokuNumbersarray){
         System.out.println("_____________");
-        for (int i=0; i<sudokuNumbersarray.length;i++) {
+        for (int i=0; i < sudokuNumbersarray.length;i++) {
             System.out.print("| ");
             for (int j = 0; j < sudokuNumbersarray[0].length; j++) {
                 System.out.print(sudokuNumbersarray[i][j] + " | ");
@@ -18,11 +23,24 @@ public class Main {
         }
         System.out.println("_____________");
     }
+    public static void shuffleArray(String[][] sudokuArray) {
+        for (int i = 0; i < sudokuArray.length; i++) {
+            ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3));
+            Collections.shuffle(numbers);
+            for (int j = 0; j < sudokuArray[i].length; j++) {
+            sudokuArray[i][j] = Integer.toString(numbers.get(j));
+            }
+        }
+        if (Integer.parseInt(sudokuArray[0][1]) + Integer.parseInt(sudokuArray[1][1]) + Integer.parseInt(sudokuArray[2][1]) != 6){
+
+        }
+    }
     public static void main(String[] args) {
         Scanner userInput=new Scanner(System.in);
 
         String[][] sudokuNumbersarray = {{"1","2","3"},{"2","3","1"},{"3","1","?"}};
         welcomeMessage();
+        shuffleArray(sudokuNumbersarray);
         printArray(sudokuNumbersarray);
       int[] sudokuInputarray = {1};
       sudokuInputarray[0] = userInput.nextInt();
