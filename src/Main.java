@@ -6,7 +6,7 @@ import java.util.Collections;
 
 public class Main {
     public static void welcomeMessage () {
-        System.out.println("Hello and welcome to Viktors Sudoku");
+        System.out.println("Hello and welcome to Viktors un-diagonal Sudoku");
         System.out.println("Guess the missing number, what should replace the question mark?");
     }
     public static void guessNumber(){
@@ -23,24 +23,84 @@ public class Main {
         }
         System.out.println("_____________");
     }
-    public static void shuffleArray(String[][] sudokuArray) {
-        for (int i = 0; i < sudokuArray.length; i++) {
-            ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3));
-            Collections.shuffle(numbers);
-            for (int j = 0; j < sudokuArray[i].length; j++) {
-            sudokuArray[i][j] = Integer.toString(numbers.get(j));
-            }
+    public static void shuffleRowonearray(String[][] sudokuArray) {
+      ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3));
+      Collections.shuffle(numbers);
+      for (int i = 0; i < sudokuArray.length; i++) {
+            sudokuArray[0][i] = Integer.toString(numbers.get(i));
         }
-        if (Integer.parseInt(sudokuArray[0][1]) + Integer.parseInt(sudokuArray[1][1]) + Integer.parseInt(sudokuArray[2][1]) != 6){
+    //public static void parseValue()    //if (Integer.parseInt(sudokuArray[0][1]) + Integer.parseInt(sudokuArray[1][1]) + Integer.parseInt(sudokuArray[2][1]) != 6){
 
+       //}
+    }
+    public static void shuffleRowtwoarray(String[][] sudokuArray) {
+        if (sudokuArray[0][0].equals("1")){
+            sudokuArray[1][0]="2";
+        }
+        else if (sudokuArray[0][0].equals("2")) {
+            sudokuArray[1][0]="3";
+        }
+        else {
+            sudokuArray[1][0]="1";
+        }
+        if (sudokuArray[0][1].equals("1")){
+            sudokuArray[1][1]="2";
+        }
+        else if (sudokuArray[0][1].equals("2")) {
+            sudokuArray[1][1]="3";
+        }
+        else {
+            sudokuArray[1][1]="1";
+        }
+        if (Integer.parseInt(sudokuArray[1][0])+Integer.parseInt(sudokuArray[1][1])==3){
+            sudokuArray[1][2]="3";
+        }
+        else if (Integer.parseInt(sudokuArray[1][0])+Integer.parseInt(sudokuArray[1][1])==4){
+            sudokuArray[1][2]="2";
+        }
+        else {
+            sudokuArray[1][2]="1";
+        }
+
+    }
+    public static void shuffleRowtthreearray(String[][] sudokuArray) {
+        if (Integer.parseInt(sudokuArray[0][0])+Integer.parseInt(sudokuArray[1][0])==3){
+            sudokuArray[2][0]="3";
+        }
+        else if (Integer.parseInt(sudokuArray[0][0])+Integer.parseInt(sudokuArray[1][0])==4){
+            sudokuArray[2][0]="2";
+        }
+        else {
+            sudokuArray[2][0]="1";
+        }
+        if (Integer.parseInt(sudokuArray[0][1])+Integer.parseInt(sudokuArray[1][1])==3){
+            sudokuArray[2][1]="3";
+        }
+        else if (Integer.parseInt(sudokuArray[0][1])+Integer.parseInt(sudokuArray[1][1])==4){
+            sudokuArray[2][1]="2";
+        }
+        else {
+            sudokuArray[2][1]="1";
+        }
+        if (Integer.parseInt(sudokuArray[0][2])+Integer.parseInt(sudokuArray[1][2])==3){
+            sudokuArray[2][2]="3";
+        }
+        else if (Integer.parseInt(sudokuArray[0][2])+Integer.parseInt(sudokuArray[1][2])==4){
+            sudokuArray[2][2]="2";
+        }
+        else {
+            sudokuArray[2][2]="1";
         }
     }
+
     public static void main(String[] args) {
         Scanner userInput=new Scanner(System.in);
 
         String[][] sudokuNumbersarray = {{"1","2","3"},{"2","3","1"},{"3","1","?"}};
         welcomeMessage();
-        shuffleArray(sudokuNumbersarray);
+        shuffleRowonearray(sudokuNumbersarray);
+        shuffleRowtwoarray(sudokuNumbersarray);
+        shuffleRowtthreearray(sudokuNumbersarray);
         printArray(sudokuNumbersarray);
       int[] sudokuInputarray = {1};
       sudokuInputarray[0] = userInput.nextInt();
