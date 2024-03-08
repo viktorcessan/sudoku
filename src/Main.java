@@ -114,4 +114,4 @@ public class Main {
       }
     }
 }
-//todo add randomizer
+//todo fix diagonal
