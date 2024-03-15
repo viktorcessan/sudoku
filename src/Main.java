@@ -9,8 +9,7 @@ public class Main {
         System.out.println("Hello and welcome to Viktors un-diagonal Sudoku");
         System.out.println("Guess the missing number, what should replace the question mark?");
     }
-    public static void guessNumber(){
-        System.out.println("What number do you think it is?");
+    public static void guessNumber(){System.out.println("What number do you think it is?");
     }
     public static void printArray(String[][]sudokuNumbersarray){
         System.out.println("_____________");
@@ -63,7 +62,7 @@ public class Main {
         }
 
     }
-    public static void shuffleRowtthreearray(String[][] sudokuArray) {
+    public static void shuffleRowthreearray(String[][] sudokuArray) {
         if (Integer.parseInt(sudokuArray[0][0])+Integer.parseInt(sudokuArray[1][0])==3){
             sudokuArray[2][0]="3";
         }
@@ -92,15 +91,24 @@ public class Main {
             sudokuArray[2][2]="1";
         }
     }
-
+    public static boolean diagonalChecker (String[][] sudokuArray) {
+        if (Integer.parseInt(sudokuArray[0][0])==Integer.parseInt(sudokuArray[1][1]) || Integer.parseInt(sudokuArray[1][1])==Integer.parseInt(sudokuArray[2][2]) || Integer.parseInt(sudokuArray[0][0])==Integer.parseInt(sudokuArray[2][2]) || Integer.parseInt(sudokuArray[0][2])==Integer.parseInt(sudokuArray[1][1]) || Integer.parseInt(sudokuArray[1][1])==Integer.parseInt(sudokuArray[2][0]) || Integer.parseInt(sudokuArray[0][2])==Integer.parseInt(sudokuArray[2][0]))
+        {return true;}
+        else {return false;}
+    }
     public static void main(String[] args) {
         Scanner userInput=new Scanner(System.in);
 
         String[][] sudokuNumbersarray = {{"1","2","3"},{"2","3","1"},{"3","1","?"}};
         welcomeMessage();
-        shuffleRowonearray(sudokuNumbersarray);
-        shuffleRowtwoarray(sudokuNumbersarray);
-        shuffleRowtthreearray(sudokuNumbersarray);
+        do {
+            shuffleRowonearray(sudokuNumbersarray);
+            shuffleRowtwoarray(sudokuNumbersarray);
+            shuffleRowthreearray(sudokuNumbersarray);
+            printArray(sudokuNumbersarray);
+
+        }
+        while (diagonalChecker(sudokuNumbersarray));
         printArray(sudokuNumbersarray);
       int[] sudokuInputarray = {1};
       sudokuInputarray[0] = userInput.nextInt();
