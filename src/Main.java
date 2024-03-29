@@ -1,6 +1,4 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +23,20 @@ public class Main {
             System.out.println();
         }
         System.out.println("_____________");
+    }
+
+    public static void solution(String[][] sudokuNumbersarray) throws FileNotFoundException {
+        PrintStream fileStream = new PrintStream(new File("sudukosolution.txt"));
+        fileStream.println("_____________");
+        for (int i = 0; i < sudokuNumbersarray.length; i++) {
+            String s = "";
+            s = s + "| ";
+            for (int j = 0; j < sudokuNumbersarray[0].length; j++) {
+                s = s + sudokuNumbersarray[i][j] + " | ";
+            }
+            fileStream.println(s);
+        }
+        fileStream.println("_____________");
     }
 
     public static void shuffleRowonearray(String[][] sudokuArray) {
@@ -98,7 +110,11 @@ public class Main {
         sudokuInputarray[0] = userInput.nextInt();
 
         boolean foundNumber = false;
+        File sudukolog = new File("sudukolog.txt");
+        sudukolog.createNewFile();
+        FileWriter fw = new FileWriter(sudukolog);
         while (!foundNumber) {
+            fw.write((Integer.toString(sudokuInputarray[0])));
             if (Integer.parseInt(sudokuNumbersarray[2][0]) + Integer.parseInt(sudokuNumbersarray[2][1]) + sudokuInputarray[0] == 6) {
                 sudokuNumbersarray[2][2] = Integer.toString(sudokuInputarray[0]);
                 System.out.println("Awesome, you were correct and win the glorious competition.");
@@ -109,10 +125,7 @@ public class Main {
                 sudokuInputarray[0] = userInput.nextInt();
             }
         }
-        File sudukolog = new File("sudukolog.txt");
-        sudukolog.createNewFile();
-        FileWriter fw = new FileWriter(sudukolog);
-        fw.write((Integer.toString(sudokuInputarray[0])));
+        solution(sudokuNumbersarray);
         fw.close();
     }
 }
